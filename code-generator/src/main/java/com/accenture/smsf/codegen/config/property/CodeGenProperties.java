@@ -33,8 +33,6 @@ public class CodeGenProperties {
 
     private String basePackage = "com.accenture.smsf.codegen";
 
-    private String baseRequestMapping = "sample";
-
     private String entityPackage = basePackage + "." + moduleName + "." + "core.entity";
 
     private String mapperPackage = basePackage + "." + moduleName + "." + "core.mapper";
@@ -42,6 +40,10 @@ public class CodeGenProperties {
     private String servicePackage = basePackage + "." + moduleName + "." + "service";
 
     private String controllerPackage = basePackage + "." + moduleName + "." + "controller";
+
+    public String getBasePackagePath() {
+        return basePackage.replace(".", "/");
+    }
 
     public String getServicePath() {
         return servicePackage.replace(".", "/");

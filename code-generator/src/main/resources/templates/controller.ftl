@@ -14,7 +14,7 @@ import java.util.List;
  * @author ${author}
  */
 @RestController
-@RequestMapping("/${baseRequestMapping}")
+@RequestMapping("/${moduleName}/${modelNameLowerCamel}")
 public class ${modelNameUpperCamel}Controller {
 
     @Autowired

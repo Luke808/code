@@ -26,6 +26,14 @@ public class CodeGeneratorRunner implements ApplicationRunner {
     private CodeGenerator controllerGenerator;
 
     @Autowired
+    @Qualifier("applicationGenerator")
+    private CodeGenerator applicationGenerator;
+
+    @Autowired
+    @Qualifier("applicationYmlGenerator")
+    private CodeGenerator applicationYmlGenerator;
+
+    @Autowired
     private CodeGenProperties codeGenProperties;
 
     @Override
@@ -33,5 +41,7 @@ public class CodeGeneratorRunner implements ApplicationRunner {
         daoGenerator.gen();
         serviceGenerator.gen();
         controllerGenerator.gen();
+        applicationGenerator.gen();
+        applicationYmlGenerator.gen();
     }
 }

@@ -32,7 +32,6 @@ public class ControllerGeneratorImpl implements CodeGenerator {
             data.put("modelNameUpperCamel", resource.getModelName());
             data.put("modelNameLowerCamel", StringUtils.toLowerCaseFirstChar(resource.getModelName()));
             data.put("basePackage", codeGenProperties.getBasePackage());
-            data.put("baseRequestMapping", codeGenProperties.getBaseRequestMapping());
 
             File controllerFile = new File(codeGenProperties.getProjectPath() +
                     codeGenProperties.getJavaPath() +

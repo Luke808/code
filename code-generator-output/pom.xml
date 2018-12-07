@@ -17,6 +17,10 @@
             <artifactId>starter-web-undertow</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.accenture.smsf</groupId>
+            <artifactId>starter-data-mybatis</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.accenture.smsf.codegen</groupId>
             <artifactId>code-generator-core</artifactId>
         </dependency>

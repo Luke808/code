@@ -14,11 +14,8 @@ import java.util.List;
  */
 public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
+    @Autowired
     BaseMapper<T> baseMapper;
-
-    public AbstractMapperServiceImpl(BaseMapper<T> baseMapper) {
-        this.baseMapper = baseMapper;
-    }
 
     @Override
     public int save(T model) {
