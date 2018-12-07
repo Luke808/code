@@ -20,11 +20,9 @@ public class CodeGenMybatisProperties {
 
     private String mappingXmlRootDirectory = "mappings.";
 
-    private String moduleName = "sample";
+    private String entityPackage = "com.accenture.smsf.codegen.sample.entity";
 
-    private String entityPackage = "com.accenture.smsf.codegen.sample.core.entity";
-
-    private String mapperPackage = "com.accenture.smsf.codegen.sample.core.mapper";
+    private String mapperPackage = "com.accenture.smsf.codegen.sample.mapper";
 
     @Data
     public static class DbConnection {

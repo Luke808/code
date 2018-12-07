@@ -1,11 +1,12 @@
-package ${basePackage}.service.${sign};
-import ${basePackage}.model.${sign}.${modelNameUpperCamel};
-import ${basePackage}.service.Service;
+package ${basePackage}.${moduleName}.service;
+
+import ${basePackage}.${moduleName}.entity.${modelNameUpperCamel};
+import com.accenture.smsf.codegen.core.service.MapperService;
 
 /**
  *
- * Created by ${author} on ${date}.
+ * @author ${author}
  */
-public interface ${modelNameUpperCamel}Service extends Service<${modelNameUpperCamel}> {
+public interface ${modelNameUpperCamel}Service extends MapperService<${modelNameUpperCamel}> {
 
 }

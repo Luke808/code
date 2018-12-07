@@ -1,18 +1,18 @@
-package ${basePackage}.service.impl.${sign};
+package ${basePackage}.${moduleName}.service.impl;
 
-import ${basePackage}.dao.mapper.${sign}.${modelNameUpperCamel}Mapper;
-import ${basePackage}.model.${sign}.${modelNameUpperCamel};
-import ${basePackage}.service.${sign}.${modelNameUpperCamel}Service;
-import ${basePackage}.service.AbstractService;
-import org.springframework.stereotype.Service;
+import ${basePackage}.${moduleName}.mapper.${modelNameUpperCamel}Mapper;
+import ${basePackage}.${moduleName}.entity.${modelNameUpperCamel};
+import ${basePackage}.${moduleName}.service.${modelNameUpperCamel}Service;
+import com.accenture.smsf.codegen.core.service.impl.AbstractMapperServiceImpl;
+import com.accenture.smsf.framework.boot.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * Created by ${author} on ${date}.
+ * @author ${author}
  */
 @Service
-public class ${modelNameUpperCamel}ServiceImpl extends AbstractService<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
+public class ${modelNameUpperCamel}ServiceImpl extends AbstractMapperServiceImpl<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
 
     @Autowired
     private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;

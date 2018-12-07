@@ -21,21 +21,25 @@ public class CodeGenProperties {
 
     private String projectModulePath = "code-generator";
 
+    private String moduleName = "sample";
+
     private String projectPath = System.getProperty("user.dir") + "/" + projectModulePath;
 
     private String resourcePath = "/src/main/resources";
 
     private String javaPath = "/src/main/java";
 
-    private String servicePackage = "com.accenture.smsf.codegen.sample.service";
+    private String basePackage = "com.accenture.smsf.codegen";
 
-    private String controllerPackage = "com.accenture.smsf.codegen.sample.controller";
+    private String servicePackage = basePackage + "." + moduleName + "." + "service";
 
-    public String getServicePath (){
+    private String controllerPackage = basePackage + "." + moduleName + "." + "controller";
+
+    public String getServicePath() {
         return servicePackage.replace(".", "/");
     }
 
-    public String getControllerPath (){
+    public String getControllerPath() {
         return controllerPackage.replace(".", "/");
     }
 

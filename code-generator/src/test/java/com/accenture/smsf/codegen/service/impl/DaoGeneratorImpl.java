@@ -59,7 +59,7 @@ public class DaoGeneratorImpl implements CodeGenerator {
         // 设置 mapping xml
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration = new SqlMapGeneratorConfiguration();
         sqlMapGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getResourcePath());
-        sqlMapGeneratorConfiguration.setTargetPackage("mappings." + codeGenMybatisProperties.getModuleName());
+        sqlMapGeneratorConfiguration.setTargetPackage("mappings." + codeGenProperties.getModuleName());
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
         // 设置 entity
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
