@@ -79,17 +79,17 @@ public class DaoGeneratorImpl implements CodeGenerator {
         context.setJavaClientGeneratorConfiguration(javaClientGeneratorConfiguration);
 
         // 增加 mapper 插件
-        addMapperPlugin(context);
+//        addMapperPlugin(context);
 
         return context;
     }
 
-    private void addMapperPlugin(Context context) {
-        PluginConfiguration pluginConfiguration = new PluginConfiguration();
-        pluginConfiguration.setConfigurationType("tk.mybatis.mapper.generator.MapperPlugin");
-        pluginConfiguration.addProperty("mappers", codeGenMybatisProperties.getMapperPackage());
-        context.addPluginConfiguration(pluginConfiguration);
-    }
+//    private void addMapperPlugin(Context context) {
+//        PluginConfiguration pluginConfiguration = new PluginConfiguration();
+//        pluginConfiguration.setConfigurationType("tk.mybatis.mapper.generator.MapperPlugin");
+//        pluginConfiguration.addProperty("mappers", codeGenMybatisProperties.getMapperPackage());
+//        context.addPluginConfiguration(pluginConfiguration);
+//    }
 
     private Context initConfig() {
         Context context = initMybatisGeneratorContext();

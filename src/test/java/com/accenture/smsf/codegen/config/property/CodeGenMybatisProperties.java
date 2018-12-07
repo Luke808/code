@@ -38,13 +38,13 @@ public class CodeGenMybatisProperties {
 
     @Data
     public static class DbConnection {
-        private String url = "jdbc:mysql://10.237.161.213:3306/smsf_authority";
+        private String url = "jdbc:mysql://10.237.161.213:3306/smsf_authority?useUnicode=true&characterEncoding=utf8";
 
         private String username = "user_dev";
 
         private String password = "Zaq_2wsx";
 
-        private String driverClassName = "com.mysql.cj.jdbc.Driver";
+        private String driverClassName = "com.mysql.jdbc.Driver";
     }
 
     @Data

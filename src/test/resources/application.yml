@@ -10,5 +10,8 @@ smsf:
       password: Zaq_2wsx
     resources:
       -
-        table-name: t_group
-        model-name: Group
+        table-name: t_authority_permission
+        model-name: permission
+      -
+        table-name: t_authority_role
+        model-name: role
