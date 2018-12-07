@@ -14,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class ${modelNameUpperCamel}ServiceImpl extends AbstractMapperServiceImpl<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
 
-    @Autowired
-    private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;
+    public ${modelNameUpperCamel}ServiceImpl(@Autowired ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper) {
+        super(${modelNameLowerCamel}Mapper);
+    }
 
 }

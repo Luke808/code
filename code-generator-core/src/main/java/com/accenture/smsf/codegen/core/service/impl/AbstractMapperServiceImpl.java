@@ -12,11 +12,13 @@ import java.util.List;
  * @author s.c.gao
  * @param <T>
  */
-public  class AbstractMapperServiceImpl<T> implements MapperService<T> {
+public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
-    @Autowired
     BaseMapper<T> baseMapper;
 
+    public AbstractMapperServiceImpl(BaseMapper<T> baseMapper) {
+        this.baseMapper = baseMapper;
+    }
 
     @Override
     public int save(T model) {

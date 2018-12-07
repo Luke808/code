@@ -3,6 +3,7 @@ package com.accenture.smsf.codegen.service.impl;
 import com.accenture.smsf.codegen.config.property.CodeGenMybatisProperties;
 import com.accenture.smsf.codegen.config.property.CodeGenProperties;
 import com.accenture.smsf.codegen.service.CodeGenerator;
+import com.accenture.smsf.codegen.utils.StringUtils;
 import com.accenture.smsf.framework.boot.stereotype.Service;
 import freemarker.template.Configuration;
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +31,10 @@ public class ServiceGeneratorImpl implements CodeGenerator {
     public void gen() throws Exception {
         for (CodeGenProperties.Resource resource : codeGenProperties.getResources()) {
             Map<String, Object> data = new HashMap<>();
-            data.put("author", "s.c.gao");
+            data.put("author", codeGenProperties.getAuthor());
             data.put("moduleName", codeGenProperties.getModuleName());
             data.put("modelNameUpperCamel", resource.getModelName());
-            data.put("modelNameLowerCamel", resource.getModelName());
+            data.put("modelNameLowerCamel", StringUtils.toLowerCaseFirstChar(resource.getModelName()));
             data.put("basePackage", codeGenProperties.getBasePackage());
             // 创建 Service 接口
             File serviceFile = new File(codeGenProperties.getProjectPath() +

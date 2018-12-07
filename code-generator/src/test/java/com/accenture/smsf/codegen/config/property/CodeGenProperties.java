@@ -19,6 +19,8 @@ public class CodeGenProperties {
 
     private List<Resource> resources = new ArrayList<>();
 
+    private String author = "s.c.gao";
+
     private String projectModulePath = "code-generator";
 
     private String moduleName = "sample";
