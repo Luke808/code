@@ -22,27 +22,17 @@ public class CodeGenMybatisProperties {
 
     private String moduleName = "sample";
 
-    private String projectPath = System.getProperty("user.dir");
-
-    private String resourcePath = "/src/main/resources";
-
-    private String javaPath = "/src/main/java";
-
     private String entityPackage = "com.accenture.smsf.codegen.sample.core.entity";
 
     private String mapperPackage = "com.accenture.smsf.codegen.sample.core.mapper";
 
-    private String servicePackage = "com.accenture.smsf.codegen.sample.service";
-
-    private String controllerPackage = "com.accenture.smsf.codegen.sample.controller";
-
     @Data
     public static class DbConnection {
-        private String url = "jdbc:mysql://10.237.161.213:3306/smsf_authority?useUnicode=true&characterEncoding=utf8";
+        private String url;
 
-        private String username = "user_dev";
+        private String username;
 
-        private String password = "Zaq_2wsx";
+        private String password;
 
         private String driverClassName = "com.mysql.jdbc.Driver";
     }

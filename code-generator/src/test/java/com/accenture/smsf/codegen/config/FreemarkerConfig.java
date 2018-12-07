@@ -1,0 +1,22 @@
+package com.accenture.smsf.codegen.config;
+
+import freemarker.template.TemplateExceptionHandler;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.io.File;
+import java.io.IOException;
+
+//@Configuration
+public class FreemarkerConfig {
+
+    @Bean
+    freemarker.template.Configuration initFreemarkerConfiguration() throws IOException {
+        freemarker.template.Configuration configuration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_23);
+        configuration.setDirectoryForTemplateLoading(new File("/templates/"));
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
+        return configuration;
+    }
+
+}

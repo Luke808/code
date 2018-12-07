@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: code-generator
+
+smsf:
+  codegen:
+#    moduleName: sample
+    mybatis:
+      datasource:
+        url: jdbc:mysql://10.237.161.213:3306/smsf_authority?useUnicode=true&characterEncoding=utf-8
+        username: user_dev
+        password: Zaq_2wsx
+    resources:
+      -
+        table-name: t_authority_permission
+        model-name: Permission
+      -
+        table-name: t_authority_role
+        model-name: Role

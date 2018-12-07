@@ -24,7 +24,7 @@ public class DaoGeneratorImpl implements CodeGenerator {
     private CodeGenMybatisProperties codeGenMybatisProperties;
 
     @Override
-    public void gen() {
+    public void gen() throws Exception {
         List<String> warnings = null;
         try {
             Configuration cfg = new Configuration();
@@ -58,17 +58,17 @@ public class DaoGeneratorImpl implements CodeGenerator {
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
         // 设置 mapping xml
         SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration = new SqlMapGeneratorConfiguration();
-        sqlMapGeneratorConfiguration.setTargetProject(codeGenMybatisProperties.getProjectPath() + codeGenMybatisProperties.getResourcePath());
+        sqlMapGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getResourcePath());
         sqlMapGeneratorConfiguration.setTargetPackage("mappings." + codeGenMybatisProperties.getModuleName());
         context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
         // 设置 entity
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
-        javaModelGeneratorConfiguration.setTargetProject(codeGenMybatisProperties.getProjectPath() + codeGenMybatisProperties.getJavaPath());
+        javaModelGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getJavaPath());
         javaModelGeneratorConfiguration.setTargetPackage(codeGenMybatisProperties.getEntityPackage());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
         // 设置 mapper
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration = new JavaClientGeneratorConfiguration();
-        javaClientGeneratorConfiguration.setTargetProject(codeGenMybatisProperties.getProjectPath() + codeGenMybatisProperties.getJavaPath());
+        javaClientGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getJavaPath());
         javaClientGeneratorConfiguration.setTargetPackage(codeGenMybatisProperties.getMapperPackage());
         javaClientGeneratorConfiguration.setConfigurationType("XMLMAPPER");
         context.setJavaClientGeneratorConfiguration(javaClientGeneratorConfiguration);

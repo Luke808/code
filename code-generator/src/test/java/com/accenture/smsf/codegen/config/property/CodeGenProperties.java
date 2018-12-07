@@ -19,6 +19,26 @@ public class CodeGenProperties {
 
     private List<Resource> resources = new ArrayList<>();
 
+    private String projectModulePath = "code-generator";
+
+    private String projectPath = System.getProperty("user.dir") + "/" + projectModulePath;
+
+    private String resourcePath = "/src/main/resources";
+
+    private String javaPath = "/src/main/java";
+
+    private String servicePackage = "com.accenture.smsf.codegen.sample.service";
+
+    private String controllerPackage = "com.accenture.smsf.codegen.sample.controller";
+
+    public String getServicePath (){
+        return servicePackage.replace(".", "/");
+    }
+
+    public String getControllerPath (){
+        return controllerPackage.replace(".", "/");
+    }
+
     @Data
     public static class Resource {
 
@@ -34,6 +54,5 @@ public class CodeGenProperties {
          * 主键列名
          */
         private String primaryKeyColumn = "id";
-
     }
 }

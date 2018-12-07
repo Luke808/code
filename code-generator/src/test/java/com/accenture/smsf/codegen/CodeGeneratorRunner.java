@@ -15,13 +15,18 @@ public class CodeGeneratorRunner implements ApplicationRunner {
 
     @Autowired
     @Qualifier("daoGenerator")
-    private CodeGenerator codeGenerator;
+    private CodeGenerator daoGenerator;
+
+//    @Autowired
+//    @Qualifier("serviceGenerator")
+//    private CodeGenerator serviceGenerator;
 
     @Autowired
     private CodeGenProperties codeGenProperties;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        codeGenerator.gen();
+        daoGenerator.gen();
+//        serviceGenerator.gen();
     }
 }
