@@ -26,7 +26,6 @@ public class DaoGeneratorImpl implements CodeGenerator {
     @Override
     public void gen() {
         List<String> warnings = null;
-        MyBatisGenerator generator = null;
         try {
             Configuration cfg = new Configuration();
             cfg.addContext(initConfig());
@@ -34,16 +33,12 @@ public class DaoGeneratorImpl implements CodeGenerator {
 
             DefaultShellCallback callback = new DefaultShellCallback(true);
             warnings = new ArrayList<String>();
-            generator = new MyBatisGenerator(cfg, callback, warnings);
+            MyBatisGenerator generator = new MyBatisGenerator(cfg, callback, warnings);
             generator.generate(null);
         } catch (Exception e) {
-            throw new RuntimeException("数据库配置失败!", e);
+            log.info("生成失败!", e);
+            throw new RuntimeException("生成失败!", e);
         }
-
-        if (generator == null || generator.getGeneratedJavaFiles().isEmpty() || generator.getGeneratedXmlFiles().isEmpty()) {
-            throw new RuntimeException("Model 和  Mapper 生成失败, warnings: " + warnings);
-        }
-
         log.info("生成成功!");
     }
 
@@ -100,7 +95,6 @@ public class DaoGeneratorImpl implements CodeGenerator {
             tableConfiguration.setGeneratedKey(new GeneratedKey(resource.getPrimaryKeyColumn(), "Mysql", true, null));
             context.addTableConfiguration(tableConfiguration);
         });
-
         return context;
     }
 }
