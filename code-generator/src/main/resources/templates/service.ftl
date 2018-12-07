@@ -1,6 +1,6 @@
 package ${basePackage}.${moduleName}.service;
 
-import ${basePackage}.${moduleName}.entity.${modelNameUpperCamel};
+import ${basePackage}.${moduleName}.core.entity.${modelNameUpperCamel};
 import com.accenture.smsf.codegen.core.service.MapperService;
 
 /**

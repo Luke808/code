@@ -41,8 +41,8 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     }
 
     @Override
-    public int delete(List<String> ids) {
-        return baseMapper.deleteByIds(StringUtils.join(ids.toArray(), ","));
+    public int batchDelete(String ids) {
+        return baseMapper.deleteByIds(ids);
     }
 
     @Override

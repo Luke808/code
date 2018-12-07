@@ -9,25 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>code-generator-core</artifactId>
+    <artifactId>code-generator-output</artifactId>
 
     <dependencies>
-        <!-- Mybatis 3rd party plugins -->
         <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>4.1.0</version>
+            <groupId>com.accenture.smsf</groupId>
+            <artifactId>starter-web-undertow</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.8</version>
-        </dependency>
-        <!-- Mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.2</version>
+            <groupId>com.accenture.smsf.codegen</groupId>
+            <artifactId>code-generator-core</artifactId>
         </dependency>
     </dependencies>
+
 </project>

@@ -22,11 +22,16 @@ public class CodeGeneratorRunner implements ApplicationRunner {
     private CodeGenerator serviceGenerator;
 
     @Autowired
+    @Qualifier("controllerGenerator")
+    private CodeGenerator controllerGenerator;
+
+    @Autowired
     private CodeGenProperties codeGenProperties;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         daoGenerator.gen();
         serviceGenerator.gen();
+        controllerGenerator.gen();
     }
 }

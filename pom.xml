@@ -7,6 +7,7 @@
     <modules>
         <module>code-generator</module>
         <module>code-generator-core</module>
+        <module>code-generator-output</module>
     </modules>
     <parent>
         <groupId>com.accenture.smsf</groupId>

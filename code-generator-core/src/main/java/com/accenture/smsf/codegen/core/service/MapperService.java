@@ -36,11 +36,11 @@ public interface MapperService<T> {
     int delete(String id);
 
     /**
-     * 删除一条记录
-     * @param id
+     * 删除多条记录
+     * @param ids   "a,b,c,d"
      * @return
      */
-    int delete(List<String> id);
+    int batchDelete(String ids);
 
     /**
      * 分页显示记录

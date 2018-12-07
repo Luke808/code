@@ -1,7 +1,8 @@
 spring:
   application:
     name: code-generator
-
+  main:
+    allow-bean-definition-overriding: true
 smsf:
   codegen:
 #    moduleName: sample

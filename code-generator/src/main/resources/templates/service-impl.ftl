@@ -1,7 +1,7 @@
 package ${basePackage}.${moduleName}.service.impl;
 
-import ${basePackage}.${moduleName}.mapper.${modelNameUpperCamel}Mapper;
-import ${basePackage}.${moduleName}.entity.${modelNameUpperCamel};
+import ${basePackage}.${moduleName}.core.mapper.${modelNameUpperCamel}Mapper;
+import ${basePackage}.${moduleName}.core.entity.${modelNameUpperCamel};
 import ${basePackage}.${moduleName}.service.${modelNameUpperCamel}Service;
 import com.accenture.smsf.codegen.core.service.impl.AbstractMapperServiceImpl;
 import com.accenture.smsf.framework.boot.stereotype.Service;

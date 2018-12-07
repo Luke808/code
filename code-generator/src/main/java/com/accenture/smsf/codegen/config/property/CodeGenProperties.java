@@ -21,7 +21,7 @@ public class CodeGenProperties {
 
     private String author = "s.c.gao";
 
-    private String projectModulePath = "code-generator";
+    private String projectModulePath = "code-generator-output";
 
     private String moduleName = "sample";
 
@@ -32,6 +32,12 @@ public class CodeGenProperties {
     private String javaPath = "/src/main/java";
 
     private String basePackage = "com.accenture.smsf.codegen";
+
+    private String baseRequestMapping = "sample";
+
+    private String entityPackage = basePackage + "." + moduleName + "." + "core.entity";
+
+    private String mapperPackage = basePackage + "." + moduleName + "." + "core.mapper";
 
     private String servicePackage = basePackage + "." + moduleName + "." + "service";
 

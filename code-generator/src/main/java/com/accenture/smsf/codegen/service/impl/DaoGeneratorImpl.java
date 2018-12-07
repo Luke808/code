@@ -39,7 +39,7 @@ public class DaoGeneratorImpl implements CodeGenerator {
             log.info("生成失败!", e);
             throw new RuntimeException("生成失败!", e);
         }
-        log.info("生成成功!");
+        log.info("Dao 生成成功!");
     }
 
     public Context initMybatisGeneratorContext() {
@@ -64,12 +64,12 @@ public class DaoGeneratorImpl implements CodeGenerator {
         // 设置 entity
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getJavaPath());
-        javaModelGeneratorConfiguration.setTargetPackage(codeGenMybatisProperties.getEntityPackage());
+        javaModelGeneratorConfiguration.setTargetPackage(codeGenProperties.getEntityPackage());
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
         // 设置 mapper
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration = new JavaClientGeneratorConfiguration();
         javaClientGeneratorConfiguration.setTargetProject(codeGenProperties.getProjectPath() + codeGenProperties.getJavaPath());
-        javaClientGeneratorConfiguration.setTargetPackage(codeGenMybatisProperties.getMapperPackage());
+        javaClientGeneratorConfiguration.setTargetPackage(codeGenProperties.getMapperPackage());
         javaClientGeneratorConfiguration.setConfigurationType("XMLMAPPER");
         context.setJavaClientGeneratorConfiguration(javaClientGeneratorConfiguration);
 
