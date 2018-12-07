@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("daoGenerator")
 @Slf4j
-public class CodeGeneratorImpl implements CodeGenerator {
+public class DaoGeneratorImpl implements CodeGenerator {
 
     @Autowired
     private CodeGenProperties codeGenProperties;

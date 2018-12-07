@@ -5,6 +5,7 @@ import com.accenture.smsf.codegen.service.CodeGenerator;
 import com.accenture.smsf.framework.boot.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
@@ -13,6 +14,7 @@ import org.springframework.boot.ApplicationRunner;
 public class CodeGeneratorRunner implements ApplicationRunner {
 
     @Autowired
+    @Qualifier("daoGenerator")
     private CodeGenerator codeGenerator;
 
     @Autowired
@@ -20,9 +22,6 @@ public class CodeGeneratorRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        codeGenProperties.getResources().forEach(resource -> {
-            log.info(resource.getModelName() + " === " + resource.getTableName());
-        });
         codeGenerator.gen();
     }
 }
