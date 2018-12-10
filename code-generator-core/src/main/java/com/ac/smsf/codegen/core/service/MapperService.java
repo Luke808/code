@@ -57,4 +57,13 @@ public interface MapperService<T> {
      */
     T findById(String id);
 
+    /**
+     * 根据输入条件查询
+     * @param t
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<T> findBy(T t, int pageNumber, int pageSize);
+
 }

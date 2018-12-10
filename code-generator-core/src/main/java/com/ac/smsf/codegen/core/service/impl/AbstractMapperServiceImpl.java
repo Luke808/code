@@ -4,6 +4,7 @@ import com.ac.smsf.codegen.core.mapper.BaseMapper;
 import com.ac.smsf.codegen.core.service.MapperService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Condition;
 
 import java.util.List;
 
@@ -50,5 +51,12 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     @Override
     public T findById(String id) {
         return baseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<T> findBy(T t, int pageNumber, int pageSize) {
+        Condition condition = new Condition(t.getClass(), false, false);
+        PageHelper.startPage(pageNumber, pageSize);
+        return baseMapper.selectByCondition(condition);
     }
 }

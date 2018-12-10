@@ -50,10 +50,17 @@ public class ${modelNameUpperCamel}Controller {
         return ${modelNameLowerCamel}Service.findById(id);
     }
 
-    @GetMapping("/list")
-    public PageInfo<${modelNameUpperCamel}> list(@RequestParam(value="pageNumber", defaultValue = "0") int pageNumber,
-    @RequestParam(value="pageSize", defaultValue = "0") int pageSize) {
+    @GetMapping("/list/{page-no}/{page-size}")
+    public PageInfo<List<${modelNameUpperCamel}>> list(@PathVariable(value="page-no") int pageNumber,
+    @PathVariable(value="page-size") int pageSize) {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.list(pageNumber, pageSize);
+        return new PageInfo(list);
+    }
+
+    @PostMapping("/find-by/{page-no}/{page-size}")
+    public PageInfo<List<${modelNameUpperCamel}>> list(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel},
+    @PathVariable("page-no") int pageNumber, @PathVariable("page-size") int pageSize) {
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel}, pageNumber, pageSize);
         return new PageInfo(list);
     }
 }
