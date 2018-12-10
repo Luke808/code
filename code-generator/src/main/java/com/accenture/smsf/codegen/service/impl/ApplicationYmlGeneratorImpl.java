@@ -3,7 +3,6 @@ package com.accenture.smsf.codegen.service.impl;
 import com.accenture.smsf.codegen.config.property.CodeGenMybatisProperties;
 import com.accenture.smsf.codegen.config.property.CodeGenProperties;
 import com.accenture.smsf.codegen.service.CodeGenerator;
-import com.accenture.smsf.codegen.utils.StringUtils;
 import com.accenture.smsf.framework.boot.stereotype.Service;
 import freemarker.template.Configuration;
 import lombok.extern.slf4j.Slf4j;
@@ -35,22 +34,17 @@ public class ApplicationYmlGeneratorImpl implements CodeGenerator {
         data.put("password", codeGenMybatisProperties.getDatasource().getPassword());
 
         File controllerFile = new File(codeGenProperties.getProjectPath() +
-                codeGenProperties.getJavaPath() +
+                codeGenProperties.getResourcePath() +
                 "/" +
-                codeGenProperties.getBasePackagePath() +
-                "/" +
-                codeGenProperties.getModuleName() +
-                "/" +
-                StringUtils.toUpperCaseFirstOne(codeGenProperties.getModuleName()) +
-                "Application.java");
+                "Application.yml");
         if (!controllerFile.getParentFile().exists()) {
             controllerFile.getParentFile().mkdirs();
         } else {
             controllerFile.delete();
         }
-        configuration.getTemplate("application.ftl").process(data, new FileWriter(controllerFile));
+        configuration.getTemplate("application.yml.ftl").process(data, new FileWriter(controllerFile));
 
-        log.info("Application生成成功!");
+        log.info("application.yml生成成功!");
     }
 
 }
