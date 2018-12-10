@@ -1,9 +1,8 @@
-package com.accenture.smsf.codegen.core.service.impl;
+package com.ac.smsf.codegen.core.service.impl;
 
-import com.accenture.smsf.codegen.core.mapper.BaseMapper;
-import com.accenture.smsf.codegen.core.service.MapperService;
+import com.ac.smsf.codegen.core.mapper.BaseMapper;
+import com.ac.smsf.codegen.core.service.MapperService;
 import com.github.pagehelper.PageHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

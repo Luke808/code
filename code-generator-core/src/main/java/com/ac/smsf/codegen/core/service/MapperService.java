@@ -1,4 +1,4 @@
-package com.accenture.smsf.codegen.core.service;
+package com.ac.smsf.codegen.core.service;
 
 import java.util.List;
 

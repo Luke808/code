@@ -1,4 +1,4 @@
-package com.accenture.smsf.codegen.core.mapper;
+package com.ac.smsf.codegen.core.mapper;
 
 import tk.mybatis.mapper.common.ConditionMapper;
 import tk.mybatis.mapper.common.IdsMapper;
