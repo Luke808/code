@@ -37,7 +37,7 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     @Override
     public int save(T model) {
         setValueToIdIfEmpty(model);
-        return baseMapper.insert(model);
+        return baseMapper.insertSelective(model);
     }
 
     private void setValueToIdIfEmpty(T model) {
