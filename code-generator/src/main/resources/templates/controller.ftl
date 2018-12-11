@@ -37,7 +37,7 @@ public class ${modelNameUpperCamel}Controller {
 
     @DeleteMapping("/batch-delete")
     public int batchDelete(@RequestParam("ids") String ids) {
-        return ${modelNameLowerCamel}Service.batchDelete(ids);
+        return ${modelNameLowerCamel}Service.batchDelete("\"" + String.join("\",\"", ids.split(",")) + "\"");
     }
 
     @PutMapping("/update")

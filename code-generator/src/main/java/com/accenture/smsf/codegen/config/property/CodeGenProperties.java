@@ -23,7 +23,7 @@ public class CodeGenProperties {
 
     private String projectModulePath = "code-generator-output";
 
-    private String moduleName = "sample";
+    private String moduleName = "task";
 
     private String projectPath = System.getProperty("user.dir") + "/" + projectModulePath;
 
@@ -31,7 +31,7 @@ public class CodeGenProperties {
 
     private String javaPath = "/src/main/java";
 
-    private String basePackage = "com.accenture.smsf.codegen";
+    private String basePackage = "com.accenture.smsf.apisp.task";
 
     private String entityPackage = basePackage + "." + moduleName + "." + "core.entity";
 
