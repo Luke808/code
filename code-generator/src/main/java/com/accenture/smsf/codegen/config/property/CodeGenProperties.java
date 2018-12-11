@@ -23,34 +23,50 @@ public class CodeGenProperties {
 
     private String projectModulePath = "code-generator-output";
 
-    private String moduleName = "task";
+    private String moduleName = "";
 
-    private String projectPath = System.getProperty("user.dir") + "/" + projectModulePath;
+    private String projectPath = System.getProperty("user.dir") + "/" + getProjectModulePath();
 
     private String resourcePath = "/src/main/resources";
 
     private String javaPath = "/src/main/java";
 
-    private String basePackage = "com.accenture.smsf.apisp.task";
+    private String basePackage = "com.accenture.smsf";
 
-    private String entityPackage = basePackage + "." + moduleName + "." + "core.entity";
+    private String entityPackage;
 
-    private String mapperPackage = basePackage + "." + moduleName + "." + "core.mapper";
+    private String mapperPackage;
 
-    private String servicePackage = basePackage + "." + moduleName + "." + "service";
+    private String servicePackage;
 
-    private String controllerPackage = basePackage + "." + moduleName + "." + "controller";
+    private String controllerPackage;
+
+    public String getEntityPackage() {
+        return getBasePackage() + "." + getModuleName() + "." + "core.entity";
+    }
+
+    public String getMapperPackage() {
+        return getBasePackage() + "." + getModuleName() + "." + "core.mapper";
+    }
+
+    public String getServicePackage() {
+        return getBasePackage() + "." + getModuleName() + "." + "service";
+    }
+
+    public String getControllerPackage() {
+        return getBasePackage() + "." + getModuleName() + "." + "controller";
+    }
 
     public String getBasePackagePath() {
-        return basePackage.replace(".", "/");
+        return getBasePackage().replace(".", "/");
     }
 
     public String getServicePath() {
-        return servicePackage.replace(".", "/");
+        return getServicePackage().replace(".", "/");
     }
 
     public String getControllerPath() {
-        return controllerPackage.replace(".", "/");
+        return getControllerPackage().replace(".", "/");
     }
 
     @Data

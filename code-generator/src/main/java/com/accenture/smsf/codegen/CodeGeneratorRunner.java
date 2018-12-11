@@ -38,8 +38,8 @@ public class CodeGeneratorRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        daoGenerator.gen();
         serviceGenerator.gen();
+        daoGenerator.gen();
         controllerGenerator.gen();
         applicationGenerator.gen();
         applicationYmlGenerator.gen();
