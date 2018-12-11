@@ -4,11 +4,13 @@ import com.ac.smsf.codegen.core.mapper.BaseMapper;
 import com.ac.smsf.codegen.core.service.MapperService;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,13 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
     @Autowired
     BaseMapper<T> baseMapper;
+
+    private Class<T> tClass;
+
+    public AbstractMapperServiceImpl() {
+        ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
+        tClass = (Class<T>) pt.getActualTypeArguments()[0];
+    }
 
     @Override
     public int save(T model) {
@@ -57,6 +66,20 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     @Override
     public T findById(String id) {
         return baseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public T findBy(String fieldName, Object value) throws TooManyResultsException {
+        try {
+            T model = tClass.getConstructor().newInstance();
+            Field field = tClass.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(model, value);
+            return baseMapper.selectOne(model);
+        } catch (ReflectiveOperationException e) {
+            log.error("查询操作异常", e);
+            return null;
+        }
     }
 
     @Override

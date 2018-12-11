@@ -63,4 +63,10 @@ public class ${modelNameUpperCamel}Controller {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel}, pageNumber, pageSize);
         return new PageInfo(list);
     }
+
+    @GetMapping("/find-one")
+    public ${modelNameUpperCamel} list(@RequestParam("fieldName") String fieldName, @RequestParam("value") String
+    value) {
+        return ${modelNameLowerCamel}Service.findBy(fieldName, value);
+    }
 }

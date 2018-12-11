@@ -66,4 +66,11 @@ public interface MapperService<T> {
      */
     List<T> findBy(T t, int pageNumber, int pageSize);
 
+    /**
+     * 单条件，指定查询
+     * @param fieldName
+     * @param value
+     * @return
+     */
+    T findBy(String fieldName, Object value);
 }
