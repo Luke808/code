@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @param <T>
@@ -34,11 +36,36 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
     @Override
     public int save(T model) {
+        setValueToIdIfEmpty(model);
         return baseMapper.insert(model);
+    }
+
+    private void setValueToIdIfEmpty(T model) {
+        Field[] fields = model.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            Id id = field.getAnnotation(Id.class);
+            if (id == null) {
+                continue;
+            } else {
+                field.setAccessible(true);
+                try {
+                    Object value = field.get(model);
+                    if (null == value) {
+                        field.set(model, UUID.randomUUID().toString());
+                    }
+                } catch (IllegalAccessException e) {
+                    log.error("校验id字段错误", e);
+                }
+                break;
+            }
+        }
     }
 
     @Override
     public int save(List<T> models) {
+        models.forEach(model -> {
+            setValueToIdIfEmpty(model);
+        });
         return baseMapper.insertList(models);
     }
 

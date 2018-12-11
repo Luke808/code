@@ -2,7 +2,6 @@ package com.ac.smsf.codegen.core.mapper;
 
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Options;
-import tk.mybatis.mapper.provider.SpecialProvider;
 
 import java.util.List;
 
