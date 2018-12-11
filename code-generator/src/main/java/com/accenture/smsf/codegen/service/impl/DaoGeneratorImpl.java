@@ -92,7 +92,9 @@ public class DaoGeneratorImpl implements CodeGenerator {
             TableConfiguration tableConfiguration = new TableConfiguration(context);
             tableConfiguration.setTableName(resource.getTableName());
             tableConfiguration.setDomainObjectName(resource.getModelName());
-            tableConfiguration.setGeneratedKey(new GeneratedKey(resource.getPrimaryKeyColumn(), "Mysql", true, null));
+            // 如果需要再表上加主键生成策略，需要配置下面这句话，直接指定为mysql，如果时其他数据库，也可以指定，可以参考tk的wiki
+            // tableConfiguration.setGeneratedKey(new GeneratedKey(resource.getPrimaryKeyColumn(), "Mysql", true,
+            // null));
             context.addTableConfiguration(tableConfiguration);
         });
         return context;
