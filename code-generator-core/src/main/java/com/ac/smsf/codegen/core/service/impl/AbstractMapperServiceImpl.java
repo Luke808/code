@@ -43,6 +43,9 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     private void setValueToIdIfEmpty(T model) {
         Field[] fields = model.getClass().getDeclaredFields();
         for (Field field : fields) {
+            if(field.getType() != String.class){
+                continue;
+            }
             Id id = field.getAnnotation(Id.class);
             if (id == null) {
                 continue;
