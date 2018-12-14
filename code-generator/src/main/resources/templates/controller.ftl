@@ -1,4 +1,5 @@
 package ${basePackage}.${moduleName}.controller;
+
 import ${basePackage}.${moduleName}.core.entity.${modelNameUpperCamel};
 import ${basePackage}.${moduleName}.service.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageInfo;
@@ -50,19 +51,30 @@ public class ${modelNameUpperCamel}Controller {
         return ${modelNameLowerCamel}Service.findById(id);
     }
 
-    @GetMapping("/list/{page-no}/{page-size}")
-    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}List(@PathVariable(value="page-no") int
+    @GetMapping("/list-paged/{page-no}/{page-size}")
+    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}ListPaged(@PathVariable(value="page-no") int
     pageNumber,
     @PathVariable(value="page-size") int pageSize) {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.list(pageNumber, pageSize);
         return new PageInfo(list);
     }
 
-    @PostMapping("/find-by/{page-no}/{page-size}")
-    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}FindBy(@RequestBody ${modelNameUpperCamel}
+    @GetMapping("/list")
+    public List<${modelNameUpperCamel}> ${modelNameLowerCamel}List() {
+        return ${modelNameLowerCamel}Service.list();
+    }
+
+    @PostMapping("/find-by-paged/{page-no}/{page-size}")
+    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}FindByPaged(@RequestBody ${modelNameUpperCamel}
     ${modelNameLowerCamel}, @PathVariable("page-no") int pageNumber, @PathVariable("page-size") int pageSize) {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel}, pageNumber, pageSize);
         return new PageInfo(list);
+    }
+
+    @PostMapping("/find-by")
+    public List<${modelNameUpperCamel}> ${modelNameLowerCamel}FindByPaged(@RequestBody ${modelNameUpperCamel}
+    ${modelNameLowerCamel}) {
+        return ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel});
     }
 
     @GetMapping("/find-one")
