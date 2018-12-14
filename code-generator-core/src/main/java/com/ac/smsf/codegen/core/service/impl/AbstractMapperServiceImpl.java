@@ -43,7 +43,7 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     private void setValueToIdIfEmpty(T model) {
         Field[] fields = model.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if(field.getType() != String.class){
+            if (field.getType() != String.class) {
                 continue;
             }
             Id id = field.getAnnotation(Id.class);
@@ -94,6 +94,11 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
     }
 
     @Override
+    public List<T> list() {
+        return baseMapper.selectAll();
+    }
+
+    @Override
     public T findById(String id) {
         return baseMapper.selectByPrimaryKey(id);
     }
@@ -114,6 +119,15 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
     @Override
     public List<T> findBy(T t, int pageNumber, int pageSize) {
+        Condition condition = generateCondition(t);
+        if (null == condition) {
+            return Collections.emptyList();
+        }
+        PageHelper.startPage(pageNumber, pageSize);
+        return baseMapper.selectByCondition(condition);
+    }
+
+    private Condition generateCondition(T t) {
         Condition condition = new Condition(t.getClass(), false, false);
         Example.Criteria criteria = condition.createCriteria();
         Field[] fields = t.getClass().getDeclaredFields();
@@ -139,9 +153,17 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
             }
         } catch (Exception e) {
             log.error("查询参数解析异常", e);
+            return null;
+        }
+        return condition;
+    }
+
+    @Override
+    public List<T> findBy(T t) {
+        Condition condition = generateCondition(t);
+        if (null == condition) {
             return Collections.emptyList();
         }
-        PageHelper.startPage(pageNumber, pageSize);
         return baseMapper.selectByCondition(condition);
     }
 
