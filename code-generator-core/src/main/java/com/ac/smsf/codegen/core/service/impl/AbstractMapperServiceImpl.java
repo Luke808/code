@@ -12,10 +12,7 @@ import tk.mybatis.mapper.entity.Example;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @param <T>
@@ -165,6 +162,34 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
             return Collections.emptyList();
         }
         return baseMapper.selectByCondition(condition);
+    }
+
+    @Override
+    public List<T> findByColumns(T t, String columns) {
+        Condition condition = generateCondition(t);
+        if (null == condition) {
+            return Collections.emptyList();
+        }
+        List<T> resultSet = baseMapper.selectByCondition(condition);
+        Field[] fields = t.getClass().getDeclaredFields();
+        List<Field> shouldEmptyFields = new ArrayList<>(fields.length);
+        for (Field field : fields) {
+            if (!columns.contains(field.getName())) {
+                shouldEmptyFields.add(field);
+            }
+        }
+        try {
+            for (T entity : resultSet) {
+                for (Field field : shouldEmptyFields) {
+                    field.setAccessible(true);
+                    field.set(entity, null);
+                }
+            }
+        } catch (Exception e) {
+            log.error("查询参数解析异常", e);
+            return null;
+        }
+        return resultSet;
     }
 
 }

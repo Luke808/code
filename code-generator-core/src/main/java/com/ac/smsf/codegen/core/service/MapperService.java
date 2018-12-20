@@ -90,6 +90,14 @@ public interface MapperService<T> {
     List<T> findBy(T t);
 
     /**
+     * 根据输入条件查询, 无分页
+     *
+     * @param t
+     * @return
+     */
+    List<T> findByColumns(T t, String columns);
+
+    /**
      * 单条件，指定查询
      *
      * @param fieldName
