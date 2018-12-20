@@ -83,4 +83,10 @@ public class ${modelNameUpperCamel}Controller {
     value) {
         return ${modelNameLowerCamel}Service.findBy(fieldName, value);
     }
+
+    @PostMapping("/find-by/{columns}")
+    public List<${modelNameUpperCamel}> ${modelNameLowerCamel}FindByColumnsPaged(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel},
+    @PathVariable("columns") String columns) {
+        return ${modelNameLowerCamel}Service.findByColumns(${modelNameLowerCamel}, columns);
+    }
 }
