@@ -52,11 +52,11 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @GetMapping("/list-paged/{page-no}/{page-size}")
-    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}ListPaged(@PathVariable(value="page-no") int
+    public PageInfo<${modelNameUpperCamel}> ${modelNameLowerCamel}ListPaged(@PathVariable(value="page-no") int
     pageNumber,
     @PathVariable(value="page-size") int pageSize) {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.list(pageNumber, pageSize);
-        return new PageInfo(list);
+        return new PageInfo<>(list);
     }
 
     @GetMapping("/list")
@@ -65,14 +65,14 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     @PostMapping("/find-by-paged/{page-no}/{page-size}")
-    public PageInfo<List<${modelNameUpperCamel}>> ${modelNameLowerCamel}FindByPaged(@RequestBody ${modelNameUpperCamel}
+    public PageInfo<${modelNameUpperCamel}> ${modelNameLowerCamel}FindByPaged(@RequestBody ${modelNameUpperCamel}
     ${modelNameLowerCamel}, @PathVariable("page-no") int pageNumber, @PathVariable("page-size") int pageSize) {
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel}, pageNumber, pageSize);
-        return new PageInfo(list);
+        return new PageInfo<>(list);
     }
 
     @PostMapping("/find-by")
-    public List<${modelNameUpperCamel}> ${modelNameLowerCamel}FindByPaged(@RequestBody ${modelNameUpperCamel}
+    public List<${modelNameUpperCamel}> ${modelNameLowerCamel}FindBy(@RequestBody ${modelNameUpperCamel}
     ${modelNameLowerCamel}) {
         return ${modelNameLowerCamel}Service.findBy(${modelNameLowerCamel});
     }
