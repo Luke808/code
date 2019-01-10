@@ -3,7 +3,6 @@ package com.ac.smsf.codegen.core.service.impl;
 import com.ac.smsf.codegen.core.annotation.IsId;
 import com.ac.smsf.codegen.core.annotation.OrderBy;
 import com.ac.smsf.codegen.core.mapper.BaseMapper;
-import com.ac.smsf.codegen.core.service.FindByMapperService;
 import com.ac.smsf.codegen.core.service.MapperService;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -22,7 +22,7 @@ import java.util.*;
  * @author s.c.gao
  */
 @Slf4j
-public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, FindByMapperService<T> {
+public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
 
     @Autowired
     BaseMapper<T> baseMapper;
@@ -136,9 +136,9 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, 
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
                 if (o2.getValue().compareTo(o1.getValue()) > 0) {
-                    return 1;
-                } else if (o2.getValue().compareTo(o1.getValue()) < 0) {
                     return -1;
+                } else if (o2.getValue().compareTo(o1.getValue()) < 0) {
+                    return 1;
                 } else {
                     return 0;
                 }
@@ -153,32 +153,34 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, 
     }
 
     private void generateOrderBy(Condition condition, Field[] fields) {
-        Map<String, Integer> ascMap = new HashMap<>();
-        Map<String, Integer> descMap = new HashMap<>();
+        Map<String, Integer> orderMap = new HashMap<>();
         for (Field field : fields) {
             OrderBy orderBy = field.getAnnotation(OrderBy.class);
             if (orderBy != null) {
-                if (orderBy.asc()) {
-                    ascMap.put(field.getName(), orderBy.order());
+                Column column = field.getAnnotation(Column.class);
+                String columnName = null;
+                if (null == column) {
+                    columnName = field.getName();
                 } else {
-                    descMap.put(field.getName(), orderBy.order());
+                    columnName = column.name();
+                }
+                if (orderBy.asc()) {
+                    orderMap.put(columnName + " asc", orderBy.order());
+                } else {
+                    orderMap.put(columnName + " desc", orderBy.order());
                 }
             }
         }
-        LinkedHashMap<String, Integer> sortedAscMap = mapSort(ascMap);
-        LinkedHashMap<String, Integer> sortedDescMap = mapSort(descMap);
+        LinkedHashMap<String, Integer> sortedOrderMap = mapSort(orderMap);
         StringBuilder stringBuilder = new StringBuilder(100);
-        stringBuilder.append(" ");
-        sortedAscMap.forEach((key, value) -> {
+        sortedOrderMap.forEach((key, value) -> {
+            if (stringBuilder.length() > 0) {
+                stringBuilder.append(", ");
+            }
             stringBuilder.append(key);
-            stringBuilder.append(" asc, ");
         });
-        sortedDescMap.forEach((key, value) -> {
-            stringBuilder.append(key);
-            stringBuilder.append(" desc, ");
-        });
-        if (stringBuilder.length() > 1) {
-            condition.setOrderByClause(stringBuilder.toString().substring(0, stringBuilder.length() - 2));
+        if (stringBuilder.length() > 0) {
+            condition.setOrderByClause(stringBuilder.toString());
         }
     }
 
