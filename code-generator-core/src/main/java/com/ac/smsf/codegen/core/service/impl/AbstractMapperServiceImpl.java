@@ -1,6 +1,8 @@
 package com.ac.smsf.codegen.core.service.impl;
 
+import com.ac.smsf.codegen.core.annotation.IsId;
 import com.ac.smsf.codegen.core.mapper.BaseMapper;
+import com.ac.smsf.codegen.core.service.FindByMapperService;
 import com.ac.smsf.codegen.core.service.MapperService;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +21,7 @@ import java.util.*;
  * @author s.c.gao
  */
 @Slf4j
-public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
+public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, FindByMapperService<T> {
 
     @Autowired
     BaseMapper<T> baseMapper;
@@ -142,8 +144,14 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T> {
                     // 数字和日期类型 == 匹配
                     criteria.andEqualTo(field.getName(), value);
                 } else if (type == String.class) {
-                    // 字符类型模糊匹配，为了使用索引，只支持后置模糊匹配
-                    criteria.andLike(field.getName(), value + "%");
+                    IsId isId = field.getAnnotation(IsId.class);
+                    if (null == isId) {
+                        // 字符类型模糊匹配，为了使用索引，只支持后置模糊匹配
+                        criteria.andLike(field.getName(), value + "%");
+                    } else {
+                        // 如果是一个id列，那么直接进行值匹配
+                        criteria.andEqualTo(field.getName(), value);
+                    }
                 } else {
                     // 其他情况暂不处理
                 }

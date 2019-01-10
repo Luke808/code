@@ -8,5 +8,5 @@ import tk.mybatis.mapper.common.IdsMapper;
  * @author s.c.gao
  */
 public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>, ConditionMapper<T>, IdsMapper<T>,
-        CustomInsertListMapper<T> {
+        CustomInsertListMapper<T>, tk.mybatis.mapper.common.ExampleMapper {
 }
