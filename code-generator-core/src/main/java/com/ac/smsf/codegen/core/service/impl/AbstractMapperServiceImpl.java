@@ -1,6 +1,7 @@
 package com.ac.smsf.codegen.core.service.impl;
 
 import com.ac.smsf.codegen.core.annotation.IsId;
+import com.ac.smsf.codegen.core.annotation.OrderBy;
 import com.ac.smsf.codegen.core.mapper.BaseMapper;
 import com.ac.smsf.codegen.core.service.FindByMapperService;
 import com.ac.smsf.codegen.core.service.MapperService;
@@ -126,6 +127,61 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, 
         return baseMapper.selectByCondition(condition);
     }
 
+    private LinkedHashMap<String, Integer> mapSort(Map<String, Integer> map) {
+        //1、按顺序保存map中的元素，使用LinkedList类型
+        List<Map.Entry<String, Integer>> keyList = new LinkedList<>(map.entrySet());
+        //2、按照自定义的规则排序
+        Collections.sort(keyList, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                if (o2.getValue().compareTo(o1.getValue()) > 0) {
+                    return 1;
+                } else if (o2.getValue().compareTo(o1.getValue()) < 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        //3、将LinkedList按照排序好的结果，存入到HashMap中
+        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> entry : keyList) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
+    }
+
+    private void generateOrderBy(Condition condition, Field[] fields) {
+        Map<String, Integer> ascMap = new HashMap<>();
+        Map<String, Integer> descMap = new HashMap<>();
+        for (Field field : fields) {
+            OrderBy orderBy = field.getAnnotation(OrderBy.class);
+            if (orderBy != null) {
+                if (orderBy.asc()) {
+                    ascMap.put(field.getName(), orderBy.order());
+                } else {
+                    descMap.put(field.getName(), orderBy.order());
+                }
+            }
+        }
+        LinkedHashMap<String, Integer> sortedAscMap = mapSort(ascMap);
+        LinkedHashMap<String, Integer> sortedDescMap = mapSort(descMap);
+        StringBuilder stringBuilder = new StringBuilder(100);
+        stringBuilder.append(" ");
+        sortedAscMap.forEach((key, value) -> {
+            stringBuilder.append(key);
+            stringBuilder.append(" asc, ");
+        });
+        sortedDescMap.forEach((key, value) -> {
+            stringBuilder.append(key);
+            stringBuilder.append(" desc, ");
+        });
+        if (stringBuilder.length() > 1) {
+            condition.setOrderByClause(stringBuilder.toString().substring(0, stringBuilder.length() - 2));
+        }
+    }
+
     private Condition generateCondition(T t) {
         Condition condition = new Condition(t.getClass(), false, false);
         Example.Criteria criteria = condition.createCriteria();
@@ -156,6 +212,7 @@ public abstract class AbstractMapperServiceImpl<T> implements MapperService<T>, 
                     // 其他情况暂不处理
                 }
             }
+            generateOrderBy(condition, fields);
         } catch (Exception e) {
             log.error("查询参数解析异常", e);
             return null;
