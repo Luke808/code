@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: code-generator-output
+  main:
+    allow-bean-definition-overriding: true
+
+smsf:
+  data:
+    jdbc:
+      connections:
+        default:
+          url: jdbc:mysql://10.237.161.213:3306/smsf_apisp?useUnicode=true&characterEncoding=utf-8
+          username: user_dev
+          password: Zaq_2wsx

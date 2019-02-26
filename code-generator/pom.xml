@@ -35,8 +35,7 @@
             <scope>runtime</scope>
         </dependency>
         <!-- Mybatis 3rd party plugins -->
-        <dependency>
-            <groupId>tk.mybatis</groupId>
+        <dependency><groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>4.1.0</version>
         </dependency>
